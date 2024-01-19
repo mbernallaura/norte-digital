@@ -50,7 +50,7 @@ const FormNewSale = () => {
                 </div>
 
                 <div className="flex flex-col justify-end pt-5 gap-y-5 divide-y divide-grey">
-                    <div className="w-[calc(30%)] flex gap-4 items-center ml-auto mr-20">
+                    <div className="w-[calc(28%)] flex gap-4 items-center ml-auto mr-20">
                         <label htmlFor="" className="font-semibold  text-grey">Total</label>
                         <input type="text" className="p-2 w-full"/>
                     </div>

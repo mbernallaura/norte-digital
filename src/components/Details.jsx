@@ -1,7 +1,7 @@
 
 const Details = () => {
     return (
-        <div className="flex py-5 justify-between gap-10">
+        <div className="flex pt-5 justify-between gap-10">
             <div className="w-[calc(50%)] flex flex-col">
                 <label htmlFor="" className="font-semibold text-grey">Name</label>
                 <input type="text" className="p-2 w-full"/>

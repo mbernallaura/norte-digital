@@ -1,11 +1,11 @@
 import React from 'react'
 
-const NewSalePage = () => {
+const ListPage = () => {
     return (
         <div>
-            holaaaa
+            liiist
         </div>
     )
 }
 
-export default NewSalePage
+export default ListPage

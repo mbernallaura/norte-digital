@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { userValidate } from '@/validations/userValidate';
 import { useRouter } from 'next/navigation';
+import { norteDigital } from '@/api/api';
 
 const LoginPage = () => {
     const router = useRouter();
@@ -11,8 +12,11 @@ const LoginPage = () => {
     });
 
     const onSubmit = (data) => {
-        console.log('Login: '+ data.username);
-        router.push(`/newSale?username=${encodeURIComponent(data.username)}`);
+        const id = norteDigital.id;
+        console.log('idLogin: '+ id);
+        localStorage.setItem('id', id);
+        router.push(`/login/${id}`);
+        // router.push(`/newSale?username=${encodeURIComponent(data.username)}`);
     };
 
     return (

@@ -9,9 +9,11 @@ const FormNewSale = () => {
     const [arrayBranch, setArrayBranch] = useState([]);
     const [arrayDetails, setArrayDetails] = useState([]);
     const [totalData, setTotalData] = useState([]);
+    let [counter, setCounter] = useState(0);
     
     const addDetails = () =>{
-        if(arrayBranch.length > 0 ) setArrayDetails([...arrayDetails, <Details data={totalData}/>]);
+        setCounter(counter+1);
+        if(arrayBranch.length > 0 ) setArrayDetails([...arrayDetails, <Details data={totalData} counter={counter}/>]);
     }
     
     const handleSelectClient = ({value}) =>{

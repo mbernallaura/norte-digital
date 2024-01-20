@@ -3,28 +3,28 @@ import { useState } from "react";
 import Details from "./Details";
 import Title from "./Title";
 import { norteDigital } from "@/api/api";
-import ReactSelect from "react-select";
 import Select from "react-select";
-// import Select from "react-select/dist/declarations/src/Select";
 
 const FormNewSale = () => {
-    const [arrayDetails, setArrayDetails] = useState([<Details/>]);
     const [arrayBranch, setArrayBranch] = useState([]);
-
+    const [arrayDetails, setArrayDetails] = useState([]);
+    const [totalData, setTotalData] = useState([]);
+    
     const addDetails = () =>{
-        setArrayDetails([...arrayDetails, <Details/>]);;
-    }
-
-    const handleSelectClient = ({value}) =>{
-        const customer = norteDigital.costomers.find(data => data.id === value);
-        setArrayBranch(customer.branches);
-    }
-
-    const handleSelectBranch = () =>{
-        const currency = arrayBranch.map(data =>(data.currency));
-        document.getElementById('currency').value = currency;
+        if(arrayBranch.length > 0 ) setArrayDetails([...arrayDetails, <Details data={totalData}/>]);
     }
     
+    const handleSelectClient = ({value}) =>{
+        const customer = norteDigital.costomers.find(data => data.id === value);
+        if(customer) setArrayBranch(customer.branches);
+    }
+    
+    const handleSelectBranch = ({value}) =>{
+        const dataCurrency = arrayBranch.find(data=> (data.id === value));
+        if(dataCurrency) setTotalData(dataCurrency);
+        const currency = dataCurrency.currency;
+        document.getElementById('currency').value = currency;
+    }
 
     return (
         <main className="flex flex-col pt-10">

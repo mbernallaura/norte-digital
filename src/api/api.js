@@ -24,6 +24,24 @@ export let norteDigital = {
                         }
                     ],
                     sales:[]
+                },
+                {
+                    id:2,
+                    nameBranch: 'México',
+                    currency: 'MXN',
+                    products:[
+                        {
+                            id: 1,
+                            name: 'Teclado',
+                            price: 1200,
+                        },
+                        {
+                            id: 2,
+                            name: 'Audifonos',
+                            price: 470
+                        }
+                    ],
+                    sales:[]
                 }
             ],
         },

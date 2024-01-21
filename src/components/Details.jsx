@@ -5,7 +5,7 @@ const Details = ({ data, counter }) => {
     const [deleteDetail, setdeleteDetail] = useState(true)
 
     const deleteDetails = () =>{
-        setdeleteDetail(false);
+        // setdeleteDetail(false);
     }
 
     return (

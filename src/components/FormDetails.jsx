@@ -1,12 +1,15 @@
 'use cliente';
 import { useEffect, useState } from "react";
 import Select from "react-select";
+import { useSetRecoilState, useRecoilValue } from "recoil"; 
+import { totalAll } from '@/atoms/index';
 
 const FormDetails = ({data, counter}) => {
-    
     const [quantity, setQuantity] = useState(0);
     const [price, setPrice] = useState(0);
     const [subtotal, setSubtotal] = useState(0);
+    const setAllTotal = useSetRecoilState(totalAll);
+    // const allTotal = useRecoilValue(totalAll);
 
     const handleName = ({ value }) => {
         const validatePrice = data.products.find((data) => data.id === value);
@@ -29,6 +32,7 @@ const FormDetails = ({data, counter}) => {
     
     useEffect(() => {
         document.getElementById(`subtotal${counter}`).value = subtotal;
+        setAllTotal((prevTotal) => prevTotal + subtotal);
     }, [subtotal, counter]);
 
     return (

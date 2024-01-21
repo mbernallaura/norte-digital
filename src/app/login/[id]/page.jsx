@@ -1,3 +1,4 @@
+'use client';
 import FormNewSale from '@/components/FormNewSale';
 import Title from '@/components/Title';
 import Image from 'next/image';

@@ -13,7 +13,6 @@ const LoginPage = () => {
 
     const onSubmit = (data) => {
         const id = norteDigital.id;
-        console.log('idLogin: '+ id);
         localStorage.setItem('id', id);
         router.push(`/login/${id}`);
         // router.push(`/newSale?username=${encodeURIComponent(data.username)}`);

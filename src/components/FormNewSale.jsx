@@ -4,8 +4,13 @@ import Details from "./Details";
 import Title from "./Title";
 import { norteDigital } from "@/api/api";
 import Select from "react-select";
+
 import { useRecoilValue } from "recoil";
 import { totalAll } from '@/atoms/index';
+
+// import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from "react-hook-form";
+
 
 const FormNewSale = () => {
     const [arrayBranch, setArrayBranch] = useState([]);
@@ -14,16 +19,17 @@ const FormNewSale = () => {
     let [counter, setCounter] = useState(0);
     const [total, setTotal] = useState(0);
     const allTotal = useRecoilValue(totalAll);
+    const { register, handleSubmit, setValue } = useForm();
     
     const addDetails = () =>{
-        setCounter(counter+1);
-        if(arrayBranch.length > 0 ) setArrayDetails([...arrayDetails, <Details data={totalData} counter={counter}/>]);
-        
+        setCounter(counter + 1);
+        if(arrayBranch.length > 0 ) setArrayDetails([...arrayDetails, <Details data={totalData} counter={counter} setValue={setValue} register={register}/>]);
     }
     
     const handleSelectClient = ({value}) =>{
         const customer = norteDigital.costomers.find(data => data.id === value);
         if(customer) setArrayBranch(customer.branches);
+        setValue('idClient', value);
     }
     
     const handleSelectBranch = ({value}) =>{
@@ -31,27 +37,29 @@ const FormNewSale = () => {
         if(dataCurrency) setTotalData(dataCurrency);
         const currency = dataCurrency.currency;
         document.getElementById('currency').value = currency;
+        setValue('idBranch', value);
+        setValue('currency', currency);
     }
 
     useEffect(() => {
         setTotal(allTotal ? allTotal : 0);
+        setValue('total', allTotal);
     }, [allTotal]);
 
 
     return (
         <main className="flex flex-col pt-10">
             <Title name={'Document'} sizeText = {'text-2xl'} font={'font-semibold'}/>
-            <form onSubmit={(e) => e.preventDefault()}>
+            <form onSubmit={handleSubmit(data => console.log(data))}>
                 <div className="flex py-5 justify-between gap-10">
                     <div className="w-[calc(40%)] flex flex-col">
                         <label htmlFor="" className="font-semibold text-grey">Client</label>
                         <div className="flex gap-4">
-                            <Select 
+                            <Select
                                 className="w-full"
-                                options={norteDigital.costomers.map(data => ({label: data.name, value: data.id}))}
+                                options={norteDigital.costomers.map(data => ({ label: data.name, value: data.id }))}
                                 onChange={handleSelectClient}
                             />
-                            {/* <input type="text" className="w-full"/> */}
                             <button className="p-2 px-4 font-extrabold text-white bg-blueLight">+</button>
                         </div>
                     </div>
@@ -80,7 +88,7 @@ const FormNewSale = () => {
                         ))
                     }
                     <div className="pt-5">
-                        <button className="p-2 px-10 font-semibold text-white bg-blueLight" onClick={addDetails}>Add</button>
+                        <button type="button" className="p-2 px-10 font-semibold text-white bg-blueLight" onClick={addDetails}>Add</button>
                     </div>
                 </div>
 
@@ -90,7 +98,7 @@ const FormNewSale = () => {
                         <input type="text" value={total} className="p-2 w-full" readOnly/>
                     </div>
                     <div className="flex justify-end">
-                        <button type="button" className="p-2 px-10 mt-5 font-semibold text-white bg-blueLight">Save</button>
+                        <button type="submit" className="p-2 px-10 mt-5 font-semibold text-white bg-blueLight">Save</button>
                     </div>
                 </div>
             </form>

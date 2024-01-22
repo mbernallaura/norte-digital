@@ -4,18 +4,18 @@ import Select from "react-select";
 import { useSetRecoilState, useRecoilValue } from "recoil"; 
 import { totalAll } from '@/atoms/index';
 
-const FormDetails = ({data, counter}) => {
+const FormDetails = ({data, counter, setValue, register}) => {
     const [quantity, setQuantity] = useState(0);
     const [price, setPrice] = useState(0);
     const [subtotal, setSubtotal] = useState(0);
     const setAllTotal = useSetRecoilState(totalAll);
-    // const allTotal = useRecoilValue(totalAll);
 
     const handleName = ({ value }) => {
         const validatePrice = data.products.find((data) => data.id === value);
         const newPrice = validatePrice.price;
         document.getElementById(`price${counter}`).value = newPrice;
-        setPrice(newPrice);  
+        setPrice(newPrice);
+        setValue('idProduct', value);
     };
 
     const handleQuantityChange = (e) => {
@@ -28,11 +28,12 @@ const FormDetails = ({data, counter}) => {
     
     useEffect(() => {
         document.getElementById(`quanty${counter}`).value = quantity;
+        setValue('quantity', quantity)
     }, [quantity, counter]);
     
     useEffect(() => {
-        document.getElementById(`subtotal${counter}`).value = subtotal;
         setAllTotal((prevTotal) => prevTotal + subtotal);
+        document.getElementById(`subtotal${counter}`).value = subtotal;
     }, [subtotal, counter]);
 
     return (
@@ -55,6 +56,7 @@ const FormDetails = ({data, counter}) => {
                     className="p-2 w-full"
                     onChange={handleQuantityChange}
                     onBlur={handleQuantityBlur}
+                    // {...register('quantity')}
                 />
             </div>
 

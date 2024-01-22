@@ -1,4 +1,4 @@
-import React from 'react'
+import Link from 'next/link';
 
 const Navbar = () => {
     return (
@@ -6,7 +6,7 @@ const Navbar = () => {
             <ul className='flex gap-8 font-openSans font-semibold text-2xl text-blueDark'>
                 <li><a href="#">Content 1</a></li>
                 <li><a href="#">Content 2</a></li>
-                <li className='text-blueLight'><a href="#">Login</a></li>
+                <li className='text-blueLight'><Link href='/login'>Login</Link></li>
             </ul>
         </nav>
     )

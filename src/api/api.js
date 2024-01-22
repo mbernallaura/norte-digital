@@ -23,7 +23,6 @@ export let norteDigital = {
                             price: 3000
                         }
                     ],
-                    sales:[]
                 },
                 {
                     id:2,
@@ -41,7 +40,6 @@ export let norteDigital = {
                             price: 470
                         }
                     ],
-                    sales:[]
                 }
             ],
         },
